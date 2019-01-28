@@ -22,7 +22,7 @@ Implementing C++ style string class in C
 ## Modifiers
 - [ ] append
 - [ ] push_back
-- [ ] assign
+- [x] assign
 - [ ] pop_back
 
 ## String Operations
