@@ -1,0 +1,18 @@
+# Object filse
+*.o
+*.obj
+
+# Precompiled Headers
+*.gch
+*.pch
+
+# Libraries
+*.lib
+
+# Shared Objects
+*.dll
+
+# Executable
+*.exe
+*.out
+*.app
