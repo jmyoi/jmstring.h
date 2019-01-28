@@ -34,6 +34,7 @@ Implementing C++ style string class in C.
 - [ ] append
   + append to string
 - [ ] push_back
+  + append character to string
 - [x] assign
   + assign content to string
 - [ ] pop_back
