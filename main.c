@@ -11,10 +11,27 @@ int main(int argc, char **argv)
 	else
 	{
 		printf("\n");
-		printf("string: %s\n", a->str);
-		printf("c_str : %s\n", c_str(a));
-		printf("size  : %d\n", size(a));
-		printf("length: %d\n", length(a));
+		printf("string  : %s\n", a->str);
+		printf("c_str   : %s\n", c_str(a));
+		printf("size    : %d\n", size(a));
+		printf("length  : %d\n", length(a));
+		printf("capacity: %d\n", capacity(a));
+		printf("\n");
+
+		assign(a, "HELLO WORLD");
+		printf("string  : %s\n", a->str);
+		printf("c_str   : %s\n", c_str(a));
+		printf("size    : %d\n", size(a));
+		printf("length  : %d\n", length(a));
+		printf("capacity: %d\n", capacity(a));
+		printf("\n");
+
+		assign(a, "Myoi");
+		printf("string  : %s\n", a->str);
+		printf("c_str   : %s\n", c_str(a));
+		printf("size    : %d\n", size(a));
+		printf("length  : %d\n", length(a));
+		printf("capacity: %d\n", capacity(a));
 		printf("\n");
 
 		free(a->str);
