@@ -16,3 +16,6 @@
 *.exe
 *.out
 *.app
+
+# Working Files
+*.swp
