@@ -34,6 +34,9 @@ int main(int argc, char **argv)
 		printf("capacity: %d\n", capacity(a));
 		printf("\n");
 
+		printf("at: %c\n", at(a, 2));
+		printf("front: %c\n", front(a));
+		printf("back: %c\n", back(a));
 		free(a->str);
 		free(a);
 	}

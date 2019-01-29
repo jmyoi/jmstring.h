@@ -75,30 +75,61 @@ int capacity(const string *s)
 {
 	return s->capacity;
 }
+
+void clear(string *s)
+{
+	(s->str)[0] = '\0';
+	s->length = 0;
+	s->beg = s->end = NULL;
+}
+_Bool isEmpty(const string *s)
+{
+	return (s->length) == 0;
+}
 /******************************************************
  *                   Element Acces
  ******************************************************/
+char at(const string *s, size_t index)
+{
+	// @TODO: null check and abort
 
+	return (s->str)[index];
+}
+
+char back(const string *s)
+{
+	// @TODO: null check and abort
+
+	return (s->str)[s->length-1];
+}
+
+char front(const string *s)
+{
+	// @TODO: null check and abort
+
+	return *(s->str);
+}
 /******************************************************
  *                     Modifiers
  ******************************************************/
-string* assign(string *work, const char * const str)
+string* assign(string *s, const char * const str)
 {
-	// @TODO: work == NULL
+	// @TODO: s == NULL
 
 	// @TODO:  check if capacity < strlen(str)
 
 	size_t length = _strlen(str);
+	s->length = length;
 
 	for(int i=0; i<length; ++i)
 	{
-		(work->str)[i] = str[i];
+		(s->str)[i] = str[i];
 	}
 
-	(work->str)[length] = '\0';
+	(s->str)[length] = '\0';
 
-	work->beg = &(work->str)[0];
-	work->end = &(work->str)[length];
+	s->beg = &((s->str)[0]);
+	s->end = &((s->str)[length]);
 
 	return NULL;
 }
