@@ -15,19 +15,19 @@ Implementing C++ style string class in C.
   + return size of allocated storage
 - [ ] reserve
   + request a change in capacity
-- [ ] clear
+- [x] clear
   + clear string
-- [ ] isEmpty
+- [x] isEmpty
   + test if string is empty
 - [ ] shrink_to_fit
   + shrink the storage to fit string
 
 ## Element Access
-- [ ] at
+- [x] at
   + get character in string
-- [ ] back
+- [x] back
   + access last character
-- [ ] front
+- [x] front
   + access first character
 
 ## Modifiers
