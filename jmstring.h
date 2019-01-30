@@ -1,6 +1,7 @@
 #pragma once
 
 #include <stdlib.h>
+#include <stdarg.h>
 
 #define INITIAL_BUFFER 16
 
@@ -12,8 +13,8 @@ typedef struct String
 	// this should be private (@TODO: find a way to hide this?)
 	const char * beg;    // points to beginning of a string
 	const char * end;    // points to end of a string
-	int capacity; // total number of characters can be hold
-	int length;   // total length of a string
+	size_t capacity; // total number of characters can be hold
+	size_t length;   // total length of a string
 } string;
 
 /******************************************************
@@ -33,7 +34,7 @@ static int _strlen(const char *str)
 /******************************************************
  *                 Member Functions
  ******************************************************/
-static string* newstr(const char * const str)
+string* _new(const char * const str)
 {
 	// initialize member variables in struct String
 	string *work = malloc(sizeof(*work));
@@ -58,52 +59,153 @@ static string* newstr(const char * const str)
 	return work;
 }
 
+void* _free(string *a)
+{
+	if(a == NULL)
+	{
+		return NULL;
+	}
+
+	a->beg = a->end = NULL;
+	free(a->str);
+	a->str = NULL;
+	free(a);
+	a = NULL;
+
+	return a;
+}
+
 /******************************************************
  *                   Capacity
  ******************************************************/
-int size(const string *s)
+int _size(const string *s)
 {
 	return s->end - s->beg;
 }
 
-int length(const string *s)
+int _length(const string *s)
 {
 	return s->end - s->beg;
 }
 
-int capacity(const string *s)
+// resize string
+static void* _resize1(string *s, size_t n)
+{
+	// @TODO: check n > capacity
+
+	s->str[n] = '\0';
+	s->length = n;
+	s->end = &(s->str)[n];
+
+	return s;
+}
+
+// resize string and fill in with 'ch'
+static void* _resize2(string *s, size_t n, const char *ch)
+{
+
+	// @TODO: check n > capacity
+
+	if(s->length < n)
+	{
+		for(int i=s->length; i<n; ++i)
+		{
+			s->str[i] = *ch;
+		}
+	}
+
+	_resize1(s, n);
+}
+
+void* _resize(string *s, size_t n, ...)
+{
+	va_list v;
+	va_start(v, n);
+
+	const char *c = va_arg(v, const char *);
+	if(*c == '\0')
+	{
+		_resize1(s, n);
+	}
+	else
+	{
+		_resize2(s, n, c);
+	}
+	va_end(v);
+
+	return s;
+}
+
+int _capacity(const string *s)
 {
 	return s->capacity;
 }
 
-void clear(string *s)
+void* _reserve(string *s, size_t n)
 {
+	if(s == NULL)
+	{
+		return NULL;
+	}
+
+	if(n > s->capacity)
+	{
+		s->capacity = n;
+		s->str = realloc(s->str, n);
+	}
+
+	return s;
+}
+
+void* _clear(string *s)
+{
+	if(s == NULL)
+	{
+		return NULL;
+	}
+
 	(s->str)[0] = '\0';
 	s->length = 0;
 	s->beg = s->end = NULL;
+
+	return s;
 }
 _Bool isEmpty(const string *s)
 {
 	return (s->length) == 0;
 }
+
+void* _shrink_to_fit(string *s)
+{
+	if(s == NULL)
+	{
+		return NULL;
+	}
+
+	size_t length = s->length;
+	s->str = realloc(s->str, length);
+	s->capacity = length;
+	return s;
+}
+
 /******************************************************
  *                   Element Acces
  ******************************************************/
-char at(const string *s, size_t index)
+char _at(const string *s, size_t index)
 {
 	// @TODO: null check and abort
 
 	return (s->str)[index];
 }
 
-char back(const string *s)
+char _back(const string *s)
 {
 	// @TODO: null check and abort
 
 	return (s->str)[s->length-1];
 }
 
-char front(const string *s)
+char _front(const string *s)
 {
 	// @TODO: null check and abort
 
@@ -112,9 +214,38 @@ char front(const string *s)
 /******************************************************
  *                     Modifiers
  ******************************************************/
-string* assign(string *s, const char * const str)
+void* _push_back(string *s, char ch)
 {
-	// @TODO: s == NULL
+	if(s == NULL)
+	{
+		return NULL;
+	}
+
+	size_t length = s->length;
+	if(length == s->capacity)
+	{
+		s->str = realloc(s->str, length << 1);
+		s->capacity = length << 1;
+	}
+
+	s->str[length] = ch;
+	(s->length)++;
+	s->str[length+1] = '\0';
+
+	return s;
+}
+
+string* _assign(string *s, const char * const str)
+{
+	// initialize member variables in struct String
+	if(s == NULL)
+	{
+		s = malloc(sizeof(*s));
+		s->str = malloc(INITIAL_BUFFER * sizeof(char));
+		s->beg = s->end = NULL;
+		s->capacity = INITIAL_BUFFER;
+		s->length = _strlen(str);
+	}
 
 	// @TODO:  check if capacity < strlen(str)
 
@@ -131,7 +262,7 @@ string* assign(string *s, const char * const str)
 	s->beg = &((s->str)[0]);
 	s->end = &((s->str)[length]);
 
-	return NULL;
+	return s;
 }
 
 /******************************************************
