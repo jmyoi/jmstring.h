@@ -3,23 +3,23 @@ Implementing C++ style string class in C.
 
 # Functions
 - [x] newstr (constructor)
-- [ ] destructor
+- [x] destructor
 ## Capacity 
 - [x] size
   + return length of string
 - [x] length
   + return length of string
-- [ ] resize
+- [x] resize
   + resize string
 - [x] capacity
   + return size of allocated storage
-- [ ] reserve
+- [x] reserve
   + request a change in capacity
 - [x] clear
   + clear string
 - [x] isEmpty
   + test if string is empty
-- [ ] shrink_to_fit
+- [x] shrink_to_fit
   + shrink the storage to fit string
 
 ## Element Access
@@ -33,7 +33,7 @@ Implementing C++ style string class in C.
 ## Modifiers
 - [ ] append
   + append to string
-- [ ] push_back
+- [x] push_back
   + append character to string
 - [x] assign
   + assign content to string
