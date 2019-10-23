@@ -33,7 +33,7 @@ Implementing C++ style string class in C.
 ## Modifiers
 - [ ] append
   + append to string
-- [x] push_back
+- [x] push_back :warning: FIX needed :warning:
   + append character to string
 - [x] assign
   + assign content to string
