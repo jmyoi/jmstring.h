@@ -7,14 +7,14 @@
 
 typedef struct String
 {
-	// public
-	char *str;
+    // public
+    char *str;
 
-	// this should be private (@TODO: find a way to hide this?)
-	const char * beg;    // points to beginning of a string
-	const char * end;    // points to end of a string
-	size_t capacity; // total number of characters can be hold
-	size_t length;   // total length of a string
+    // this should be private (@TODO: find a way to hide this?)
+    const char * beg;    // points to beginning of a string
+    const char * end;    // points to end of a string
+    size_t capacity; // total number of characters can be hold
+    size_t length;   // total length of a string
 } string;
 
 /******************************************************
@@ -24,12 +24,13 @@ static int _strlen(const char * const str)
 {
     const char *p = str;
     const char *q = str;
-	while(*q)
+
+    while(*q)
     {
         ++q;
     }
 
-	return q - p;
+    return q - p;
 }
 
 /******************************************************
@@ -37,239 +38,239 @@ static int _strlen(const char * const str)
  ******************************************************/
 string* _new(const char * const str)
 {
-	// initialize member variables in struct String
-	string *work = malloc(sizeof(*work));
-	work->str = malloc(INITIAL_BUFFER * sizeof(char));
-	work->beg = work->end = NULL;
-	work->capacity = INITIAL_BUFFER;
-	work->length = _strlen(str);
+    // initialize member variables in struct String
+    string *work = malloc(sizeof(*work));
+    work->str = malloc(INITIAL_BUFFER * sizeof(char));
+    work->beg = work->end = NULL;
+    work->capacity = INITIAL_BUFFER;
+    work->length = _strlen(str);
 
-	// @TODO: check if length > capacity, if so realloc
+    // @TODO: check if length > capacity, if so realloc
 
-	// copy string
-	int length = work->length;
-	for(int i=0; i<length; ++i)
-	{
-		(work->str)[i] = str[i];
-	}
-	(work->str)[length] = '\0';
+    // copy string
+    int length = work->length;
+    for(int i=0; i<length; ++i)
+    {
+        (work->str)[i] = str[i];
+    }
+    (work->str)[length] = '\0';
 
-	work->beg = &(work->str)[0];
-	work->end = &((work->str)[length]); // should be NULL('\0')
+    work->beg = &(work->str)[0];
+    work->end = &((work->str)[length]); // should be NULL('\0')
 
-	return work;
+    return work;
 }
 
 void* _free(string *a)
 {
-	if(a == NULL)
-	{
-		return NULL;
-	}
+    if(a == NULL)
+    {
+        return NULL;
+    }
 
-	a->beg = a->end = NULL;
-	free(a->str);
-	a->str = NULL;
-	free(a);
-	a = NULL;
+    a->beg = a->end = NULL;
+    free(a->str);
+    a->str = NULL;
+    free(a);
+    a = NULL;
 
-	return a;
+    return a;
 }
 
 /******************************************************
  *                   Capacity
  ******************************************************/
-int _size(const string *s)
+int _size(const string * const s)
 {
-	return s->end - s->beg;
+    return s->end - s->beg;
 }
 
-int _length(const string *s)
+int _length(const string * const s)
 {
-	return s->end - s->beg;
+    return s->end - s->beg;
 }
 
 // resize string
-static void* _resize1(string *s, size_t n)
+static void* _resize1(string *s, const size_t n)
 {
-	// @TODO: check n > capacity
+    // @TODO: check n > capacity
 
-	s->str[n] = '\0';
-	s->length = n;
-	s->end = &(s->str)[n];
+    s->str[n] = '\0';
+    s->length = n;
+    s->end = &(s->str)[n];
 
-	return s;
+    return s;
 }
 
 // resize string and fill in with 'ch'
-static void* _resize2(string *s, size_t n, const char *ch)
+static void* _resize2(string *s, const size_t n, const char * const ch)
 {
 
-	// @TODO: check n > capacity
+    // @TODO: check n > capacity
 
-	if(s->length < n)
-	{
-		for(int i=s->length; i<n; ++i)
-		{
-			s->str[i] = *ch;
-		}
-	}
+    if(s->length < n)
+    {
+        for(int i=s->length; i<n; ++i)
+        {
+            s->str[i] = *ch;
+        }
+    }
 
-	_resize1(s, n);
+    _resize1(s, n);
 }
 
 void* _resize(string *s, size_t n, ...)
 {
-	va_list v;
-	va_start(v, n);
+    va_list v;
+    va_start(v, n);
 
-	const char *c = va_arg(v, const char *);
-	if(*c == '\0')
-	{
-		_resize1(s, n);
-	}
-	else
-	{
-		_resize2(s, n, c);
-	}
-	va_end(v);
+    const char *c = va_arg(v, const char *);
+    if(*c == '\0')
+    {
+        _resize1(s, n);
+    }
+    else
+    {
+        _resize2(s, n, c);
+    }
+    va_end(v);
 
-	return s;
+    return s;
 }
 
-int _capacity(const string *s)
+int _capacity(const string * const s)
 {
-	return s->capacity;
+    return s->capacity;
 }
 
-void* _reserve(string *s, size_t n)
+void* _reserve(string *s, const size_t n)
 {
-	if(s == NULL)
-	{
-		return NULL;
-	}
+    if(s == NULL)
+    {
+        return NULL;
+    }
 
-	if(n > s->capacity)
-	{
-		s->capacity = n;
-		s->str = realloc(s->str, n);
-	}
+    if(n > s->capacity)
+    {
+        s->capacity = n;
+        s->str = realloc(s->str, n);
+    }
 
-	return s;
+    return s;
 }
 
 void* _clear(string *s)
 {
-	if(s == NULL)
-	{
-		return NULL;
-	}
+    if(s == NULL)
+    {
+        return NULL;
+    }
 
-	(s->str)[0] = '\0';
-	s->length = 0;
-	s->beg = s->end = NULL;
+    (s->str)[0] = '\0';
+    s->length = 0;
+    s->beg = s->end = NULL;
 
-	return s;
+    return s;
 }
-_Bool isEmpty(const string *s)
+_Bool isEmpty(const string * const s)
 {
-	return (s->length) == 0;
+    return (s->length) == 0;
 }
 
 void* _shrink_to_fit(string *s)
 {
-	if(s == NULL)
-	{
-		return NULL;
-	}
+    if(s == NULL)
+    {
+        return NULL;
+    }
 
-	size_t length = s->length;
-	s->str = realloc(s->str, length);
-	s->capacity = length;
-	return s;
+    size_t length = s->length;
+    s->str = realloc(s->str, length);
+    s->capacity = length;
+    return s;
 }
 
 /******************************************************
  *                   Element Acces
  ******************************************************/
-char _at(const string *s, size_t index)
+char _at(const string * const s, const size_t index)
 {
-	// @TODO: null check and abort
+    // @TODO: null check and abort
 
-	return (s->str)[index];
+    return (s->str)[index];
 }
 
-char _back(const string *s)
+char _back(const string * const s)
 {
-	// @TODO: null check and abort
+    // @TODO: null check and abort
 
-	return (s->str)[s->length-1];
+    return (s->str)[s->length-1];
 }
 
-char _front(const string *s)
+char _front(const string * const s)
 {
-	// @TODO: null check and abort
+    // @TODO: null check and abort
 
-	return *(s->str);
+    return *(s->str);
 }
 /******************************************************
  *                     Modifiers
  ******************************************************/
-void* _push_back(string *s, char ch)
+void* _push_back(string *s, const char ch)
 {
-	if(s == NULL)
-	{
-		return NULL;
-	}
+    if(s == NULL)
+    {
+        return NULL;
+    }
 
-	size_t length = s->length;
-	if(length == s->capacity)
-	{
-		s->str = realloc(s->str, length << 1);
-		s->capacity = length << 1;
-	}
+    size_t length = s->length;
+    if(length == s->capacity)
+    {
+        s->str = realloc(s->str, length << 1);
+        s->capacity = length << 1;
+    }
 
-	s->str[length] = ch;
-	(s->length)++;
-	s->str[length+1] = '\0';
+    s->str[length] = ch;
+    (s->length)++;
+    s->str[length+1] = '\0';
 
-	return s;
+    return s;
 }
 
 string* _assign(string *s, const char * const str)
 {
-	// initialize member variables in struct String
-	if(s == NULL)
-	{
-		s = malloc(sizeof(*s));
-		s->str = malloc(INITIAL_BUFFER * sizeof(char));
-		s->beg = s->end = NULL;
-		s->capacity = INITIAL_BUFFER;
-		s->length = _strlen(str);
-	}
+    // initialize member variables in struct String
+    if(s == NULL)
+    {
+        s = malloc(sizeof(*s));
+        s->str = malloc(INITIAL_BUFFER * sizeof(char));
+        s->beg = s->end = NULL;
+        s->capacity = INITIAL_BUFFER;
+        s->length = _strlen(str);
+    }
 
-	// @TODO:  check if capacity < strlen(str)
+    // @TODO:  check if capacity < strlen(str)
 
-	size_t length = _strlen(str);
-	s->length = length;
+    size_t length = _strlen(str);
+    s->length = length;
 
-	for(int i=0; i<length; ++i)
-	{
-		(s->str)[i] = str[i];
-	}
+    for(int i=0; i<length; ++i)
+    {
+        (s->str)[i] = str[i];
+    }
 
-	(s->str)[length] = '\0';
+    (s->str)[length] = '\0';
 
-	s->beg = &((s->str)[0]);
-	s->end = &((s->str)[length]);
+    s->beg = &((s->str)[0]);
+    s->end = &((s->str)[length]);
 
-	return s;
+    return s;
 }
 
 /******************************************************
  *                 String Operations
  ******************************************************/
-const char* c_str(const string *s)
+const char* c_str(const string * const s)
 {
-	return s->str;
+    return s->str;
 }
