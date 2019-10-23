@@ -20,15 +20,16 @@ typedef struct String
 /******************************************************
  *               HELPER FUNCTIONS
  ******************************************************/
-static int _strlen(const char *str)
+static int _strlen(const char * const str)
 {
-	int index = 0;
-	while(str[index] != '\0')
-	{
-		++index;
-	}
+    const char *p = str;
+    const char *q = str;
+	while(*q)
+    {
+        ++q;
+    }
 
-	return index;
+	return q - p;
 }
 
 /******************************************************
