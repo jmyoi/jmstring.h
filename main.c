@@ -1,5 +1,6 @@
 #include <stdio.h>
-#include "jmstring.h"
+
+#include "muistring.h"
 
 int main(int argc, char **argv)
 {
