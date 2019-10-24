@@ -1,4 +1,4 @@
-# jmstring
+# muistring
 Implementing C++ style string class in C.
 
 # Functions
