@@ -39,24 +39,34 @@ int main(int argc, char **argv)
 
     _setstr(str, "I love coding");
     printf("word      : %s\n", _getstr(str));
+    assert(*(_front(str)) == 'I');
+    assert(*(_back(str)) == 'g');
     assert(_length(str) == 13);
 
     _resize(str, 14, " ");
     printf("word      : %s\n", _getstr(str));
+    assert(*(_back(str)) == ' ');
     assert(_length(str) == 14);
 
     _resize(str, 15, "C");
     printf("word      : %s\n", _getstr(str));
+    assert(*(_back(str)) == 'C');
     assert(_length(str) == 15);
 
     _resize(str, 17, "+");
     printf("word      : %s\n", _getstr(str));
+    assert(*(_back(str)) == '+');
     assert(_length(str) == 17);
 
     _resize(str, 13, "+");
     printf("word      : %s\n", _getstr(str));
+    assert(*(_back(str)) == 'g');
     assert(_length(str) == 13);
 
+    assert(_at(str, 0) == 'I');
+    assert(_at(str, 4) == 'v');
+    assert(_at(str, 5) == 'e');
+    assert(_at(str, 20) == '\0');
     free(str);
 
     return 0;
