@@ -40,8 +40,11 @@ void _replace (string_t_pc s, size_t pos, size_t n, char *src)
 }
 
 /* swapping two address should work.... r..ight? */
-void _swap (string_t_cp s1, string_t_cp s2)
+void _swap (string_t **s1, string_t **s2)
 {
+    string_t *temp = *s1;
+    *s1 = *s2;
+    *s2 = temp;
 }
 
 void* _pop_back (string_t_pc s)
@@ -52,6 +55,7 @@ void* _pop_back (string_t_pc s)
     }
     
     --(s->length);
+    (s->str)[s->length] = '\0';
     s->end = --(s->end);
 
     return s->str;
