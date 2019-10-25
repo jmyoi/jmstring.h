@@ -32,11 +32,11 @@ helpers:
   + shrink the storage to fit string
 
 ## Element Access
-- [ ] at
+- [x] at
   + get character in string
-- [ ] back
+- [x] back
   + access last character
-- [ ] front
+- [x] front
   + access first character
 
 ## Modifiers
