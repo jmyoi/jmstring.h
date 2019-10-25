@@ -11,8 +11,8 @@ typedef struct string
     char *str;
 
     /* private variable (not really) */
-    const char *beg;    /* points to beginning of the string */
-    const char *end;    /* points to end of the string */
+    char *beg;    /* points to beginning of the string */
+    char *end;    /* points to end of the string */
     size_t capacity;    /* size of allocated storage */
     size_t length;      /* current length of a string */
 } string_t;
