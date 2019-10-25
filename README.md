@@ -1,9 +1,18 @@
 # muistring
 Implementing C++ style string class in C.
 
+Main file: `muistring.h`
+
+helpers: 
+ - `capacity.h`
+ - `element_access.h`
+ - `modifiers.h`
+ - `strops.h`
+
 # Functions
 - [x] newstr (constructor)
-- [x] destructor
+- [] destructor
+
 ## Capacity 
 - [x] size
   + return length of string
@@ -23,29 +32,29 @@ Implementing C++ style string class in C.
   + shrink the storage to fit string
 
 ## Element Access
-- [x] at
+- [] at
   + get character in string
-- [x] back
+- [] back
   + access last character
-- [x] front
+- [] front
   + access first character
 
 ## Modifiers
 - [ ] append
   + append to string
-- [x] push_back :warning: FIX needed :warning:
+- [] push_back
   + append character to string
-- [x] assign
+- [] assign
   + assign content to string
-- [ ] pop_back
+- [] pop_back
   + delete last character
 
 ## String Operations
-- [x] c_str
+- [] c_str
   + get C string equivalent
-- [ ] find
+- [] find
   + find content in string
-- [ ] substr
+- [] substr
   + generate substring
-- [ ] compare
+- [] compare
   + compare strings
