@@ -46,7 +46,7 @@ helpers:
   + append character to string
 - [ ] assign
   + assign content to string
-- [ ] pop_back
+- [x] pop_back
   + delete last character
 
 ## String Operations
