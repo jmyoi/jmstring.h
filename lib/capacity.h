@@ -91,7 +91,7 @@ static void resize_1(string_t_pc s, const size_t n)
 
 static void resize_2(string_t_pc s, const size_t n, const char *ch)
 {
-    size_t prev_size = _strlen(s->str);
+    size_t prev_size = s->length;
     size_t index;
     resize_1(s, n);
 
