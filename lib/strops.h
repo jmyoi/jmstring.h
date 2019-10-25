@@ -1,5 +1,9 @@
+char* _data(string_t_cpc s)
+{
+    return s->beg;
+}
+
 #if 0
-data
 copy
 find
 rfind
