@@ -58,7 +58,7 @@ helpers:
   + delete last character
 
 ## String Operations
-- [ ] data
+- [x] data
   + get string data
 - [ ] find
   + find content in string
