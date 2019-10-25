@@ -1,9 +1,9 @@
 # muistring
 Implementing C++ style string class in C.
 
-Main file: `muistring.h`
+Main Header: `muistring.h`
 
-helpers: 
+Functions: 
  - `capacity.h`
  - `element_access.h`
  - `modifiers.h`
@@ -11,7 +11,7 @@ helpers:
 
 # Functions
 - [x] newstr (constructor)
-- [ ] destructor
+- [x] delete (destructor)
 
 ## Capacity 
 - [x] size
@@ -52,7 +52,7 @@ helpers:
   + erase characters from string
 - [ ] replace
   + replace portion of string 
-- [ ] swap
+- [x] swap
   + swap string values
 - [x] pop\_back
   + delete last character
