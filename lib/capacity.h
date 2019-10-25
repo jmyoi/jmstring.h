@@ -85,7 +85,7 @@ static void resize_1(string_t_pc s, const size_t n)
     {
         (s->str)[n] = '\0';
         s->length = n;
-        s->end = &(s->str)[n];
+        s->end = (s->str) + n - 1;
     }
 }
 
@@ -99,9 +99,11 @@ static void resize_2(string_t_pc s, const size_t n, const char *ch)
     {
         (s->str)[index] = *ch;
     }
+
+    s->end = (s->str) + n - 1;
 }
 
-void* _resize(string_t_pc s, size_t n, ...)
+void* _resize(string_t_pc s, const size_t n, ...)
 {
     va_list v;
 
