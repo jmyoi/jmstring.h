@@ -1,70 +1,63 @@
 #include <stdio.h>
+#include <assert.h>
 
 #include "muistring.h"
 
 int main(int argc, char **argv)
 {
-	string *a = _new("Hello");
+    String *str = _new("Hello World");
 
-	if(a == NULL)
-	{
-		printf("null\n");
-	}
-	else
-	{
-		_assign(a, "HELLO WORLD");
-		printf("string  : %s\n", a->str);
-		printf("c_str   : %s\n", c_str(a));
-		printf("size    : %d\n", _size(a));
-		printf("length  : %d\n", _length(a));
-		printf("capacity: %d\n", _capacity(a));
-		printf("at: %c\n", _at(a, 1));
-		printf("front: %c\n", _front(a));
-		printf("back: %c\n", _back(a));
-		printf("\n");
+    printf("word      : %s\n", _getstr(str));
+    assert(_size(str) == 11);
+    assert(_length(str) == 11);
+    assert(_maxsize() == 0xFFFFFFFF);
+    assert(_empty(str) == 0);
+    _shrink_to_fit(str);
+    assert(_capacity(str) == 11);
+    assert(_reserve(str, 10) == NULL);
+    _reserve(str, 15);
+    assert(_capacity(str) == 15);
 
-		_resize(a, 5);
-		printf("resize(5): %s\n", a->str);
-		printf("length  : %d\n", _length(a));
-		printf("capacity: %d\n", _capacity(a));
-		printf("\n");
+    _clear(str);
 
-		_resize(a, 7, "+");
-		printf("resize(7): %s\n", a->str);
-		printf("length  : %d\n", _length(a));
-		printf("capacity: %d\n", _capacity(a));
-		printf("\n");
+    printf("word      : %s\n", _getstr(str));
+    assert(_getstr(str) == NULL);
+    assert(_size(str) == 0);
+    assert(_length(str) == 0);
+    assert(_maxsize() == 0xFFFFFFFF);
+    assert(_empty(str) == 1);
+    _shrink_to_fit(str);
+    assert(_capacity(str) == 0);
+    assert(_reserve(str, 0xFFFFFFFF + 1) == NULL);
+    _reserve(str, 20);
+    assert(_capacity(str) == 20);
+    _resize(str, 15);
+    assert(_length(str) == 15);
+    assert(_capacity(str) == 20);
 
-		_resize(a, 6, "+");
-		printf("resize(6): %s\n", a->str);
-		printf("length  : %d\n", _length(a));
-		printf("capacity: %d\n", _capacity(a));
-		printf("\n");
+    _clear(str);
 
-		_reserve(a, 18);
-		printf("string  : %s\n", a->str);
-		printf("length  : %d\n", _length(a));
-		printf("capacity: %d\n", _capacity(a));
-		printf("\n");
+    _setstr(str, "I love coding");
+    printf("word      : %s\n", _getstr(str));
+    assert(_length(str) == 13);
 
-		_shrink_to_fit(a);
-		printf("string  : %s\n", a->str);
-		printf("length  : %d\n", _length(a));
-		printf("capacity: %d\n", _capacity(a));
-		printf("\n");
+    _resize(str, 14, " ");
+    printf("word      : %s\n", _getstr(str));
+    assert(_length(str) == 14);
 
+    _resize(str, 15, "C");
+    printf("word      : %s\n", _getstr(str));
+    assert(_length(str) == 15);
 
-		_push_back(a, 'm');
-		_push_back(a, 'y');
-		_push_back(a, 'o');
-		_push_back(a, 'i');
-		printf("string  : %s\n", a->str);
-		printf("length  : %d\n", _length(a));
-		printf("capacity: %d\n", _capacity(a));
-	}
+    _resize(str, 17, "+");
+    printf("word      : %s\n", _getstr(str));
+    assert(_length(str) == 17);
 
-	
-	_free(a);
+    _resize(str, 13, "+");
+    printf("word      : %s\n", _getstr(str));
+    assert(_length(str) == 13);
 
-	return 0;
+    free(str);
+
+    return 0;
 }
