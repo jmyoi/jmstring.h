@@ -42,19 +42,39 @@ helpers:
 ## Modifiers
 - [ ] append
   + append to string
-- [ ] push_back
+- [ ] push\_back
   + append character to string
 - [ ] assign
   + assign content to string
-- [x] pop_back
+- [ ] insert
+  + insert into string
+- [ ] erase
+  + erase characters from string
+- [ ] replace
+  + replace portion of string 
+- [ ] swap
+  + swap string values
+- [x] pop\_back
   + delete last character
 
 ## String Operations
-- [ ] c_str
-  + get C string equivalent
+- [ ] data
+  + get string data
 - [ ] find
   + find content in string
+- [ ] rfind
+  + find last occurrence of content in string
+- [ ] find\_first\_of
+  + find character in a string
+- [ ] find\_last\_of
+  + find character in a string from the end 
+- [ ] find\_first\_not\_of
+  + find absence of character in a string
+- [ ] find\_last\_not\_of 
+  + find absence of character in a string from the end 
 - [ ] substr
   + generate substring
+- [ ] strtok
+  + generate tokens from the string 
 - [ ] compare
   + compare strings
