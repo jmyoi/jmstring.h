@@ -87,16 +87,12 @@ String* _new(char *str)
 /*****************************************************
  *                SETTERS & GETTERS                  *
  *****************************************************/
-char* _getstr(string_t_cpc s)
-{
-    if ((s->str)[0] == '\0')
-    {
-        return NULL;
-    }
 
-    return s->str;
-}
-
+/*
+ * @TODO
+ * GETTER removed => _data() is equivalent to it
+ * SETTER will be replaced with => _assign() in lib/modifiers.h
+ * */
 void _setstr(string_t_pc s, char *word)
 {
     size_t size;
