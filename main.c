@@ -68,8 +68,23 @@ int main(int argc, char **argv)
     assert(_at(str, 5) == 'e');
     assert(_at(str, 20) == '\0');
 
-    free(str);
+    delete(str);
 
+    str = _new("Hello");
+    string_t *str2 = _new("World");
 
+    printf("str1: %s(%p)        str2:%s(%p)\n", _data(str), &(str->str), _data(str2), &(str2->str));
+    _swap(&str, &str2);
+    printf("str1: %s(%p)        str2:%s(%p)\n", _data(str), &(str->str), _data(str2), &(str2->str));
+
+    while(!_empty(str))
+    {
+        printf("%s\n", (char *)_pop_back(str));
+    }
+
+    /* @TODO: destructer */
+    delete(str);
+    delete(str2);
+   
     return 0;
 }
