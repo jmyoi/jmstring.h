@@ -84,6 +84,23 @@ String* _new(char *str)
     return newstr;
 }
 
+void* delete(string_t *s)
+{
+    if (s == NULL)
+    {
+        return NULL;
+    }
+
+    s->beg = s->end = NULL;
+    free(s->str);
+    s->str = NULL;
+
+    free(s);
+    s = NULL;
+
+    return s;
+}
+
 /*****************************************************
  *                SETTERS & GETTERS                  *
  *****************************************************/
