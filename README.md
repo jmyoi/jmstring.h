@@ -11,7 +11,7 @@ helpers:
 
 # Functions
 - [x] newstr (constructor)
-- [] destructor
+- [ ] destructor
 
 ## Capacity 
 - [x] size
@@ -32,29 +32,29 @@ helpers:
   + shrink the storage to fit string
 
 ## Element Access
-- [] at
+- [ ] at
   + get character in string
-- [] back
+- [ ] back
   + access last character
-- [] front
+- [ ] front
   + access first character
 
 ## Modifiers
 - [ ] append
   + append to string
-- [] push_back
+- [ ] push_back
   + append character to string
-- [] assign
+- [ ] assign
   + assign content to string
-- [] pop_back
+- [ ] pop_back
   + delete last character
 
 ## String Operations
-- [] c_str
+- [ ] c_str
   + get C string equivalent
-- [] find
+- [ ] find
   + find content in string
-- [] substr
+- [ ] substr
   + generate substring
-- [] compare
+- [ ] compare
   + compare strings
